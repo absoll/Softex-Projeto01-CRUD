@@ -1,5 +1,13 @@
 const leitor = require('readline-sync')
 
+const estruturaLivroPadrao = {
+    matricula: 0,
+    nome: 'texto',
+    editora: 'texto',
+    autor: 'texto'
+}
+
+
 
 function menu(){
     //console.clear()
