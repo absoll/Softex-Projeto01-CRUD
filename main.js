@@ -8,6 +8,7 @@ const estruturaLivroPadrao = {
   autor: "texto",
 };
 
+//Função para listar TODOS os livros. Retorna um vetor contendo todos os livros encontrados
 function listarLivros() {
   var vetorRetorno = [];
   for (livro of livros) {
@@ -16,6 +17,7 @@ function listarLivros() {
   return vetorRetorno;
 }
 
+//Função para buscar livros por ID(matricula). Visto ser um dado unico, caso encontre retorna o objeto, caso contrario retorna "undefined"
 function buscarLivroId(id) {
   let resultado = undefined;
   for (let i = 0; i < livros.length; i++) {
@@ -40,7 +42,11 @@ function menu() {
 //Classe livro que sera usada em todo o CRUD
 class Livro {
   constructor(nome = "", editora = "", autor = "") {
-    this.matricula = livros.length + 1;
+    if (livros.length == 0) {
+      //verifica o tamanho do vetor de livro, se for = 0, inicia a matricula em 1
+      this.matricula = 1;
+    } else this.matricula = livros[livros.length - 1].getMatricula + 1; //Caso contrario verifica o valor da matricula do ultimo elemento e incrementa em 1
+
     this.nome = nome;
     this.editora = editora;
     this.autor = autor;
@@ -72,7 +78,7 @@ class Livro {
   }
 }
 
-//populando o vetor inicialmente
+//populando o vetor inicialmente, para fazer os testes de buscar/alterar/apagar
 const livros = [];
 let livro = new Livro("nome1", "editora1", "autor1");
 livros.push(livro);
@@ -90,7 +96,7 @@ do {
     case 0:
       console.log("Saindo do sistema...");
       break;
-    case 1:
+    case 1: //Opção para listar todos os livros
       console.log("----- LISTANDO TODOS OS LIVROS ----");
       resultado = listarLivros();
       for (livro of resultado) {
@@ -100,12 +106,12 @@ do {
         console.log(`Autor: ${livro.getAutor}\n`);
       }
       console.log("Aperte qualquer tecla para voltar ao menu...");
-      leitor.keyIn();
+      leitor.keyIn(); //Fica aguardando o usuario digitar qualquer tecla para prosseguir
       console.clear();
       break;
     case 2: //cadastrarLivro()
       break;
-    case 3:
+    case 3: // opção para buscar apenas 1 elemento por ID
       let id = leitor.questionInt(
         "Digite o numero de matricula do livro a ser buscado: \n"
       );
