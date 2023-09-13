@@ -27,16 +27,33 @@ function buscarLivroId(id) {
   return resultado;
 }
 
+function apagarLivro(id){
+  if(livros.length > 0){
+
+    for (const livro of livros) {
+      if (livro.matricula === id) {
+        let nomeLivro = livro.getNome;
+        livros.splice(livros.indexOf(livro), 1);
+        return `Livro ${nomeLivro} excluído com sucesso!`;
+      }
+    }
+    return "Livro não encontrado!";
+  }else{
+    return "Livro não encontrado!";
+  }
+  
+}
+
 //Função menu - mostra o menu e as opções
 function menu() {
   //console.clear()
   console.log("----- MENU LIVRARIA -----");
-  console.log("0 - Sair");
   console.log("1 - Listar todos os livros");
   console.log("2 - Cadastrar livro");
   console.log("3 - Buscar livro");
   console.log("4 - Alterar livro");
   console.log("5 - Apagar livro");
+  console.log("0 - Sair");
 }
 
 //Classe livro que sera usada em todo o CRUD
@@ -135,6 +152,12 @@ do {
     case 4: //alterarLivro(id)
       break;
     case 5: //apagarLivro(id)
+      let id_remover_livro = leitor.questionInt("Digite o numero de matricula do livro a ser removido: \n");
+      apagarLivroResultado = apagarLivro(id_remover_livro);
+      console.log(apagarLivroResultado);
+      console.log("Aperte qualquer tecla para voltar ao menu...");
+      leitor.keyIn();
+      console.clear();
       break;
     default:
       console.log("Opção invalida... digite novamente");
