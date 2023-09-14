@@ -27,6 +27,19 @@ function buscarLivroId(id) {
   return resultado;
 }
 
+//função para alterar livros por ID(matricula). Visto ser um dado único, caso encontre o objeto irá solicitar novo nome, editora e autor e salvar com a matrícula referente.
+function alterarLivroId (id){
+    const livroAlterar = livros.findIndex (livro => livro.matricula == id);
+    if (livroAlterar !== -1){
+      livros[livroAlterar].nome = leitor.question ("nome do livro: ");
+      livros[livroAlterar].editora = leitor.question ("nome da editora: ");
+      livros[livroAlterar].autor = leitor.question ("nome do autor: ");
+      return `Livro ${livros[livroAlterar].nome} foi alterado com sucesso! `;
+    }else{
+    return "Livro não encontrado";
+    }
+ }
+
 function apagarLivro(id){
   if(livros.length > 0){
 
@@ -150,6 +163,12 @@ do {
       console.clear();
       break;
     case 4: //alterarLivro(id)
+      let idAlterarLivro = leitor.questionInt("Digite o numero de matricula do livro a ser alterado: \n");
+      alterarLivroResultado = alterarLivroId (idAlterarLivro);
+      console.log (alterarLivroResultado);
+      console.log ("Aperte qualquer tecla para voltar ao menu...");
+      leitor.keyIn ();
+      console.clear ();
       break;
     case 5: //apagarLivro(id)
       let id_remover_livro = leitor.questionInt("Digite o numero de matricula do livro a ser removido: \n");
