@@ -8,6 +8,13 @@ const estruturaLivroPadrao = {
   autor: "texto",
 };
 
+const resultadosPosiveis = {
+  SUCESSO: 1,
+  ERRO_GERAL: 0,
+  ERRO_REFERENCE_ERROR: 2,
+  ERRO_RANGE_ERROR: 3,
+};
+
 //Função para listar TODOS os livros. Retorna um vetor contendo todos os livros encontrados
 function listarLivros() {
   var vetorRetorno = [];
@@ -19,7 +26,7 @@ function listarLivros() {
 
 //Função para buscar livros por ID(matricula). Visto ser um dado unico, caso encontre retorna o objeto, caso contrario retorna "undefined"
 function buscarLivroId(id) {
-  let resultado = undefined;
+  let resultado = resultadosPosiveis.ERRO_GERAL;
   for (let i = 0; i < livros.length; i++) {
     if (id == livros[i].getMatricula) resultado = livros[i];
   }
@@ -28,23 +35,37 @@ function buscarLivroId(id) {
 }
 
 //função para alterar livros por ID(matricula). Visto ser um dado único, caso encontre o objeto irá solicitar novo nome, editora e autor e salvar com a matrícula referente.
-function alterarLivroId(id) {
-  const livroAlterar = livros.findIndex(livro => livro.matricula == id);
+/*function alterarLivroId(id) {
+  const livroAlterar = buscarLivroId(id)//livros.findIndex((livro) => livro.matricula == id);
   if (livroAlterar !== -1) {
-    livros[livroAlterar].nome = leitor.question("nome do livro: ");
-    livros[livroAlterar].editora = leitor.question("nome da editora: ");
-    livros[livroAlterar].autor = leitor.question("nome do autor: ");
+    livros[livroAlterar].setNome = leitor.question("nome do livro: ");
+    livros[livroAlterar].setEditora = leitor.question("nome da editora: ");
+    livros[livroAlterar].setAutor = leitor.question("nome do autor: ");
     return `Livro ${livros[livroAlterar].nome} foi alterado com sucesso! `;
   } else {
     return "Livro não encontrado";
   }
 }
+*/
+
+function alterarLivro(objeto, nome, editora, autor) {
+  let resultado;
+  try {
+    objeto.setNome = nome;
+    objeto.setEditora = editora;
+    objeto.setAutor = autor;
+    resultado = resultadosPosiveis.SUCESSO;
+  } catch (error) {
+    resultado = resultadosPosiveis.ERRO_GERAL;
+  } finally {
+    return resultado;
+  }
+}
 
 function apagarLivro(id) {
   if (livros.length > 0) {
-
     for (const livro of livros) {
-      if (livro.matricula === id) {
+      if (livro.getMatricula === id) {
         let nomeLivro = livro.getNome;
         livros.splice(livros.indexOf(livro), 1);
         return `Livro ${nomeLivro} excluído com sucesso!`;
@@ -54,7 +75,6 @@ function apagarLivro(id) {
   } else {
     return "Livro não encontrado!";
   }
-
 }
 
 //Função menu - mostra o menu e as opções
@@ -67,18 +87,6 @@ function menu() {
   console.log("4 - Alterar livro");
   console.log("5 - Apagar livro");
   console.log("0 - Sair");
-}
-
-function cadastrarLivro() {
-
-  nome = leitor.question("Nome do livro: ");
-  editora = leitor.question("Nome da editora: ");
-  autor = leitor.question("Nome do autor: ");
-  const livro = new Livro(nome, editora, autor);
-  livros.push(livro);
-  console.log("Livro cadastrado com sucesso! \n");
-  leitor.keyInPause;
-
 }
 
 //Classe livro que sera usada em todo o CRUD
@@ -151,7 +159,7 @@ do {
       leitor.keyIn(); //Fica aguardando o usuario digitar qualquer tecla para prosseguir
       console.clear();
       break;
-    case 2: cadastrarLivro();
+    case 2: //cadastrarLivro()
       break;
     case 3: // opção para buscar apenas 1 elemento por ID
       let id = leitor.questionInt(
@@ -175,15 +183,45 @@ do {
       console.clear();
       break;
     case 4: //alterarLivro(id)
-      let idAlterarLivro = leitor.questionInt("Digite o numero de matricula do livro a ser alterado: \n");
+      /*let idAlterarLivro = leitor.questionInt(
+        "Digite o numero de matricula do livro a ser alterado: \n"
+      );
       alterarLivroResultado = alterarLivroId(idAlterarLivro);
       console.log(alterarLivroResultado);
+      */
+      let idAlterarLivro = leitor.questionInt(
+        "Digite o numero de matricula do livro a ser alterado: \n"
+      );
+      const livroBuscado = buscarLivroId(idAlterarLivro);
+      if (livroBuscado === resultadosPosiveis.ERRO_GERAL)
+        console.log("Livro não encontrado");
+      else {
+        let nome = leitor.question(
+          `Nome: ${livroBuscado.getNome}. Novo nome do livro: `
+        );
+        let editora = leitor.question(
+          `Editora: ${livroBuscado.getEditora}. Nova editora do livro: `
+        );
+        let autor = leitor.question(
+          `Autor: ${livroBuscado.getAutor}. Novo autor do livro: `
+        );
+
+        let result = alterarLivro(livroBuscado, nome, editora, autor);
+
+        if (result === resultadosPosiveis.SUCESSO) {
+          console.log("Livro editado com sucesso");
+        } else if (result === resultadosPosiveis.ERRO_GERAL) {
+          console.log("Erro ao alterar o livro. Tente novamente mais tarde.");
+        }
+      }
       console.log("Aperte qualquer tecla para voltar ao menu...");
       leitor.keyIn();
       console.clear();
       break;
     case 5: //apagarLivro(id)
-      let id_remover_livro = leitor.questionInt("Digite o numero de matricula do livro a ser removido: \n");
+      let id_remover_livro = leitor.questionInt(
+        "Digite o numero de matricula do livro a ser removido: \n"
+      );
       apagarLivroResultado = apagarLivro(id_remover_livro);
       console.log(apagarLivroResultado);
       console.log("Aperte qualquer tecla para voltar ao menu...");
