@@ -1,3 +1,3 @@
 module.exports = {
-  enderecoLocalBancoDados: "/BancoDados/banco.db",
+  enderecoLocalBancoDados: "./banco.db",
 };
