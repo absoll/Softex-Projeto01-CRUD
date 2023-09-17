@@ -5,7 +5,7 @@ function abrirConexao() {
         if (err) {
             console.error(err.message);
         } else {
-            console.log('Connected to the livros database.');
+            //console.log('Connected to the livros database.');
         }
     });
 
@@ -34,7 +34,6 @@ function inserirLivro(nome,editora,autor){
       if (err) {
         return console.log(err.message);
       }
-      // get the last insert id
       console.log(`Livro ${nome} inserido com sucesso!`);
     });
   
