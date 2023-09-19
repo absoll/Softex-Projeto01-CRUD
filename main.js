@@ -5,7 +5,7 @@ import LivroView from "#diretorioRaiz/view/livroView.js";
 
 //Função menu - mostra o menu e as opções
 function menu() {
-  //console.clear();
+  console.clear();
   console.log("----- MENU LIVRARIA -----");
   console.log("1 - Listar todos os livros");
   console.log("2 - Cadastrar livro");
@@ -14,6 +14,9 @@ function menu() {
   console.log("5 - Apagar livro");
   console.log("0 - Sair");
 }
+
+//criação de 1 objeto unico que irá manipular o View
+const view = new LivroView();
 
 //Inicio da execução do codigo
 let opt;
@@ -25,19 +28,19 @@ do {
       console.log("Saindo do sistema...");
       break;
     case 1:
-      new LivroView().listarTodos();
+      view.listarTodos();
       break;
     case 2:
-      new LivroView().cadastrar();
+      view.cadastrar();
       break;
     case 3:
-      new LivroView().buscarID();
+      view.buscarID();
       break;
     case 4:
-      new LivroView().alterar();
+      view.alterar();
       break;
     case 5:
-      new LivroView().apagar();
+      view.apagar();
       break;
     default:
       console.log("Opção invalida... digite novamente");
