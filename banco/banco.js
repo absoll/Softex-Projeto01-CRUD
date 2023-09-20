@@ -44,7 +44,7 @@ function abrirConexao() {
     });
   }
 
-
+  //Função para buscar todos os livros
   function listarLivros(db) {
     return new Promise((resolve, reject) => {
       let sql = `SELECT * FROM livros`;
@@ -54,9 +54,36 @@ function abrirConexao() {
           console.error(err.message);
           reject(err);
         } else {
-          livros.forEach((livro) => {
-            console.log(livro.matricula, livro.nome, livro.autor, livro.editora);
-          });
+          if (livros) {
+            livros.forEach((livro) => {
+              console.log(livro.matricula, livro.nome, livro.autor, livro.editora);
+            });
+          } else {
+            console.log('Nenhum livro cadastrado!.');
+          }
+          resolve();
+        }
+      });
+    });
+  }
+
+  //Função para buscar um livro por nome
+  function buscarPorNome(db,nome) {
+    return new Promise((resolve, reject) => {
+      let sql = `SELECT * FROM livros WHERE nome LIKE '%${nome}%'`;
+  
+      db.all(sql, [], (err, livros) => {
+        if (err) {
+          console.error(err.message);
+          reject(err);
+        } else {
+          if (livros) {
+            livros.forEach((livro) => {
+              console.log(livro.matricula, livro.nome, livro.autor, livro.editora);
+            });
+          } else {
+            console.log(`Nenhum livro com o nome ${nome} encontrado!`);
+          }
           resolve();
         }
       });
@@ -128,6 +155,7 @@ module.exports = {
     criarTabelas,
     listarLivros,
     buscarPorMatricula,
+    buscarPorNome,
     inserirLivro,
     alterarLivro,
     apagarLivro
