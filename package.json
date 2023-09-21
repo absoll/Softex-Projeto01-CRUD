@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "main": "main.js",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "chcp 65001 & node main.js"
@@ -18,6 +17,8 @@
     }
   },
   "dependencies": {
-    "readline-sync": "^1.4.10"
+    "readline-sync": "^1.4.10",
+    "sqlite": "^5.0.1",
+    "sqlite3": "^5.1.6"
   }
 }

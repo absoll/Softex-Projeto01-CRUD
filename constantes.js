@@ -5,4 +5,4 @@ export const resultadosPosiveis = {
   ERRO_RANGE_ERROR: 3,
 };
 
-export const enderecoLocalBancoDados = "/BancoDados/banco.db";
+export const enderecoLocalBancoDados = "/banco/banco.db";
