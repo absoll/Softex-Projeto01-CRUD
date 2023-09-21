@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 const leitor = require("readline-sync");
 
 //Estrutura padrao do objeto Livro, para referencia quando for fazer as operações nele
@@ -56,6 +57,13 @@ function apagarLivro(id) {
   }
 
 }
+=======
+import * as leitor from "readline-sync";
+import LivroView from "#diretorioRaiz/view/livroView.js";
+import CriarTabelas from "#diretorioRaiz/banco/BDTabelas.js";
+//const leitor = require("readline-sync");
+//const livroView = require("#diretorioRaiz/view/livroView.js");
+>>>>>>> Stashed changes
 
 //Função menu - mostra o menu e as opções
 function menu() {
@@ -63,12 +71,14 @@ function menu() {
   console.log("----- MENU LIVRARIA -----");
   console.log("1 - Listar todos os livros");
   console.log("2 - Cadastrar livro");
-  console.log("3 - Buscar livro");
-  console.log("4 - Alterar livro");
-  console.log("5 - Apagar livro");
+  console.log("3 - Buscar livro por matricula");
+  console.log("4 - Buscar livro por nome");
+  console.log("5 - Alterar livro");
+  console.log("6 - Apagar livro");
   console.log("0 - Sair");
 }
 
+<<<<<<< Updated upstream
 function cadastrarLivro() {
 
   nome = leitor.question("Nome do livro: ");
@@ -194,3 +204,41 @@ do {
       console.log("Opção invalida... digite novamente");
   }
 } while (opt != 0);
+=======
+(async () => {
+  //criação de 1 objeto unico que irá manipular o View
+  const view = new LivroView();
+
+  //Inicio da execução do codigo
+  let opt;
+  do {
+    menu();
+    opt = leitor.questionInt("Escolha uma opção\n");
+    switch (opt) {
+      case 0:
+        console.log("Saindo do sistema...");
+        break;
+      case 1:
+        await view.listarTodos();
+        break;
+      case 2:
+        await view.cadastrar();
+        break;
+      case 3:
+        await view.buscarID();
+        break;
+      case 4:
+        await view.buscarNome();
+        break;
+      case 5:
+        await view.alterar();
+        break;
+      case 6:
+        await view.apagar();
+        break;
+      default:
+        console.log("Opção invalida... digite novamente");
+    }
+  } while (opt != 0);
+})();
+>>>>>>> Stashed changes
