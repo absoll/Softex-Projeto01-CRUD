@@ -43,5 +43,5 @@ class BDTabelas extends BancoDados {
 export default (async () => {
   let criarTabelas = new BDTabelas();
 
-  criarTabelas.criarTabelas();
+  await criarTabelas.criarTabelas();
 })();
