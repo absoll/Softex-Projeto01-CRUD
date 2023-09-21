@@ -51,6 +51,8 @@ function menu() {
         break;
       default:
         console.log("Opção invalida... digite novamente");
+        console.log("Aperte qualquer tecla para voltar ao menu...");
+        leitor.keyIn(); //Fica aguardando o usuario digitar qualquer tecla para prosseguir
     }
   } while (opt != 0);
 })();
