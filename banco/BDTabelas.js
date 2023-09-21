@@ -40,8 +40,8 @@ class BDTabelas extends BancoDados {
 
 //função assincrona e anonima vazia, se auto-chamando, para ser executada ao chamar o nome do arquivo no
 //Importar. Ela faz o trabalho de apenas criar o banco localmente e criar as tabelas locais
-export default (async () => {
+export default async () => {
   let criarTabelas = new BDTabelas();
 
   await criarTabelas.criarTabelas();
-})();
+};

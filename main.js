@@ -19,6 +19,7 @@ function menu() {
 
 (async () => {
   //criação de 1 objeto unico que irá manipular o View
+  await CriarTabelas();
   const view = new LivroView();
 
   //Inicio da execução do codigo

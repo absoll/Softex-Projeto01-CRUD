@@ -81,8 +81,7 @@ export default class BDLivro extends BancoDados {
       await this.conexaoAbrir();
       resultado = await this.BD.all(
         `SELECT * FROM livros 
-            WHERE nome = ?`,
-        [nome]
+            WHERE nome LIKE '%${nome}%'`
       );
       await this.conexaoFechar();
     } catch (error) {

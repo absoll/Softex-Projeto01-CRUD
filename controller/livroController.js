@@ -60,7 +60,7 @@ class LivroController {
     let retorno = [];
     try {
       //A primeira letra de cada nome esta maiuscula, entao deve fazer o mesmo procedimento antes de pesquisar
-      nome = constantes.primeiraLetraMaiuscula(nome);
+      //nome = constantes.primeiraLetraMaiuscula(nome);
       let dados = await this.LivroBD.buscarNome(nome);
 
       if (typeof dados == "object") {
