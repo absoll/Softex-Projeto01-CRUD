@@ -1,1 +1,1 @@
-# Softex-Projeto01-CRUD
+Projeto de gerenciador de livraria, desenvolvido em JS com banco de dados (SQlite) e sua execução é através do comando "npm run start". Está dividido em 4 partes: visualizar, controlador, modelo e o banco de dados.
