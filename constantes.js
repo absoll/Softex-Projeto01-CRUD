@@ -1,3 +1,4 @@
+//Lista de possiveis erros durante a aplicação
 export const resultadosPosiveis = {
   SUCESSO: 1,
   ERRO_GERAL: 0,
@@ -5,6 +6,7 @@ export const resultadosPosiveis = {
   ERRO_RANGE_ERROR: 3,
 };
 
+//Lista de possiveis erros resultantes durante execução do BD
 export const resultadosPosiveisBD = {
   SUCESSO: 1,
   ERRO_GERAL: 99,
