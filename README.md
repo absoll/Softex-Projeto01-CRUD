@@ -43,7 +43,7 @@ Dois detalhes peculiares sobre o projeto ainda podem ser ditos:
 
 ## Membros do Grupo
 
-[Francisco Torres](https://github.com/absoll)
-[Gabriel Mendes](https://github.com/GabrielMendes94)
-[Iara Monte](https://github.com/IaraLMonte)
-[Matheus Santana](https://github.com/matheusfsantana)
+- [Francisco Torres](https://github.com/absoll)
+- [Gabriel Mendes](https://github.com/GabrielMendes94)
+- [Iara Monte](https://github.com/IaraLMonte)
+- [Matheus Santana](https://github.com/matheusfsantana)
