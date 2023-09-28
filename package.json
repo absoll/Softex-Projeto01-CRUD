@@ -3,8 +3,6 @@
   "description": "",
   "version": "1.0.0",
   "main": "main.js",
-  "type": "module",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "chcp 65001 & node main.js"
@@ -21,5 +19,10 @@
     "readline-sync": "^1.4.10",
     "sqlite": "^5.0.1",
     "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2"
   }
 }
