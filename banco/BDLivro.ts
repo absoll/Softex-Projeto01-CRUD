@@ -1,5 +1,6 @@
-import { resultadosPosiveisBD } from "#diretorioRaiz/constantes.js";
-import BancoDados from "#diretorioRaiz/banco/BDConexao.js";
+import { resultadosPossiveisBD } from "#diretorioRaiz/constantes";
+import BancoDados from "#diretorioRaiz/banco/BDConexao";
+import Livro from "#diretorioRaiz/model/livroModel";
 
 //Classe responsavel por fazer toda a interacao de LIVROS com o banco de dados
 export default class BDLivro extends BancoDados {
@@ -8,8 +9,8 @@ export default class BDLivro extends BancoDados {
   }
 
   //Função responsavel por adicionar um livro no banco
-  async adicionar(livro) {
-    let resultado;
+  async adicionar(livro: Livro): Promise<resultadosPossiveisBD> {
+    let resultado: resultadosPossiveisBD = resultadosPossiveisBD.ERRO_GERAL;
     try {
       //abrindo a conexao com o banco, para em seguida realizar a operação
       await this.conexaoAbrir();
@@ -30,34 +31,36 @@ export default class BDLivro extends BancoDados {
       //fecha a conexao com o banco
       await this.conexaoFechar();
       //caso chegue nesse ponto, significa que a operação foi um sucesso e atribui o valor de sucesso ao resultado
-      resultado = resultadosPosiveisBD.SUCESSO;
+      resultado = resultadosPossiveisBD.SUCESSO;
     } catch (error) {
       //aqui ficaria o tratamento de erros, no caso como nao esta tratando erros especificos no projeto, retorna apenas ERRO_GERAL
       console.log(error);
-      resultado = resultadosPosiveisBD.ERRO_GERAL;
+      resultado = resultadosPossiveisBD.ERRO_GERAL;
     } finally {
       return resultado;
     }
   }
 
   //Função responsavel por listar todos os livros do banco
-  async listarTodos() {
-    let resultado = [];
+  async listarTodos(): Promise<Array<Livro> | resultadosPossiveisBD> {
+    let resultado: Array<Livro> | resultadosPossiveisBD = [];
     try {
       await this.conexaoAbrir();
       resultado = await this.BD.all(`SELECT * FROM livros`);
       await this.conexaoFechar();
     } catch (error) {
-      //console.log(error);
-      resultado = resultadosPosiveisBD.ERRO_GERAL;
+      console.log(error);
+      resultado = resultadosPossiveisBD.ERRO_GERAL;
     } finally {
       return resultado;
     }
   }
 
   //Função responsavel por realizar uma busca no banco utilizando a matricula
-  async buscarMatricula(matricula) {
-    let resultado = [];
+  async buscarMatricula(
+    matricula: number
+  ): Promise<Array<Livro> | resultadosPossiveisBD> {
+    let resultado: Array<Livro> | resultadosPossiveisBD = [];
     try {
       await this.conexaoAbrir();
       resultado = await this.BD.all(
@@ -68,15 +71,17 @@ export default class BDLivro extends BancoDados {
       await this.conexaoFechar();
     } catch (error) {
       console.log(error);
-      resultado = resultadosPosiveisBD.ERRO_GERAL;
+      resultado = resultadosPossiveisBD.ERRO_GERAL;
     } finally {
       return resultado;
     }
   }
 
   //Função responsavel por realizar uma busca no banco por NOME
-  async buscarNome(nome) {
-    let resultado = [];
+  async buscarNome(
+    nome: string
+  ): Promise<Array<Livro> | resultadosPossiveisBD> {
+    let resultado: Array<Livro> | resultadosPossiveisBD = [];
     try {
       await this.conexaoAbrir();
       resultado = await this.BD.all(
@@ -86,15 +91,15 @@ export default class BDLivro extends BancoDados {
       await this.conexaoFechar();
     } catch (error) {
       console.log(error);
-      resultado = resultadosPosiveisBD.ERRO_GERAL;
+      resultado = resultadosPossiveisBD.ERRO_GERAL;
     } finally {
       return resultado;
     }
   }
 
   //Função responsavel por alterar uma informação na tabela
-  async alterar(livro) {
-    let resultado;
+  async alterar(livro: Livro): Promise<resultadosPossiveisBD> {
+    let resultado: resultadosPossiveisBD = resultadosPossiveisBD.ERRO_GERAL;
     try {
       await this.conexaoAbrir();
       resultado = await this.BD.run(
@@ -116,18 +121,18 @@ export default class BDLivro extends BancoDados {
         ]
       );
       await this.conexaoFechar();
-      resultado = resultadosPosiveisBD.SUCESSO;
+      resultado = resultadosPossiveisBD.SUCESSO;
     } catch (error) {
       console.log(error);
-      resultado = resultadosPosiveisBD.ERRO_GERAL;
+      resultado = resultadosPossiveisBD.ERRO_GERAL;
     } finally {
       return resultado;
     }
   }
 
   //função responsavel por apagar um dado da tabela
-  async deletar(matricula) {
-    let resultado;
+  async deletar(matricula: number): Promise<resultadosPossiveisBD> {
+    let resultado: resultadosPossiveisBD = resultadosPossiveisBD.ERRO_GERAL;
     try {
       await this.conexaoAbrir();
       resultado = await this.BD.run(
@@ -137,10 +142,10 @@ export default class BDLivro extends BancoDados {
         [matricula]
       );
       await this.conexaoFechar();
-      resultado = resultadosPosiveisBD.SUCESSO;
+      resultado = resultadosPossiveisBD.SUCESSO;
     } catch (error) {
       console.log(error);
-      resultado = resultadosPosiveisBD.ERRO_GERAL;
+      resultado = resultadosPossiveisBD.ERRO_GERAL;
     } finally {
       return resultado;
     }

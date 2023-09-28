@@ -1,6 +1,6 @@
 export default {};
 //Lista de possiveis erros durante a aplicação
-export enum resultadosPosiveis {
+export enum resultadosPossiveis {
   SUCESSO = 1,
   ERRO_GERAL = 0,
   ERRO_REFERENCE_ERROR = 2,
@@ -8,13 +8,16 @@ export enum resultadosPosiveis {
 }
 
 //Lista de possiveis erros resultantes durante execução do BD
-export enum resultadosPosiveisBD {
+export enum resultadosPossiveisBD {
   SUCESSO = 1,
   ERRO_GERAL = 99,
   ERRO_SQL_ERROR = 2,
   ERRO_ABRIR_BANCO = 3,
   ERRO_FECHAR_BANCO = 4,
+  CRIACAO_TABELA_ERRADA = 5
 }
+
+export type errosPossiveis = resultadosPossiveisBD | resultadosPossiveis
 
 export const enderecoLocalBancoDados: string = "./banco/banco.db";
 

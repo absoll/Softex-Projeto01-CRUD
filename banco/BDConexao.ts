@@ -1,6 +1,6 @@
 import {
   enderecoLocalBancoDados,
-  resultadosPosiveisBD,
+  resultadosPossiveisBD,
 } from "#diretorioRaiz/constantes";
 //from "#diretorioRaiz/constantes.ts";
 import sqlite3 from "sqlite3";
@@ -10,37 +10,35 @@ import { open } from "sqlite";
 //ela especifica o local do arquivo do banco e possui os métodos para Abrir e Fechar conexao com o banco
 export default class BancoDados {
   #enderecoBD: string;
-  #BD: any;
+  BD: any;
 
   constructor(enderecoBancoLocal: string = enderecoLocalBancoDados) {
     this.#enderecoBD = enderecoBancoLocal;
   }
 
   //Função responsavel por abrir conexão com o banco
-  async conexaoAbrir(): Promise<resultadosPosiveisBD> {
+  async conexaoAbrir(): Promise<resultadosPossiveisBD> {
     try {
-      this.#BD = await open({
+      this.BD = await open({
         //especificado o endereco que ira guardar as informações do banco
         filename: this.#enderecoBD,
         driver: sqlite3.Database,
       });
-      return resultadosPosiveisBD.SUCESSO;
+      return resultadosPossiveisBD.SUCESSO;
     } catch (error) {
       console.log("Erro criar " + error);
-      return resultadosPosiveisBD.ERRO_ABRIR_BANCO;
+      return resultadosPossiveisBD.ERRO_ABRIR_BANCO;
     }
   }
 
   //função responsavel por fechar o banco
-  async conexaoFechar(): Promise<resultadosPosiveisBD> {
+  async conexaoFechar(): Promise<resultadosPossiveisBD> {
     try {
-      await this.#BD.close();
-      return resultadosPosiveisBD.SUCESSO;
+      await this.BD.close();
+      return resultadosPossiveisBD.SUCESSO;
     } catch (error) {
       console.log("fechar " + error);
-      return resultadosPosiveisBD.ERRO_FECHAR_BANCO;
+      return resultadosPossiveisBD.ERRO_FECHAR_BANCO;
     }
   }
 }
-
-console.log("teste");

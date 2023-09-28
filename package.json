@@ -2,10 +2,10 @@
   "name": "softex-projeto01-crud",
   "description": "",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "chcp 65001 & node main.js"
+    "start": "chcp 65001 & ts-node main.ts"
   },
   "keywords": [],
   "author": "",

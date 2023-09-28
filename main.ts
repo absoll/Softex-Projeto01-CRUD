@@ -1,6 +1,6 @@
-import * as leitor from "readline-sync";
-import LivroView from "#diretorioRaiz/view/livroView.js";
-import CriarTabelas from "#diretorioRaiz/banco/BDTabelas.js";
+let leitor = require("readline-sync");
+import LivroView from "#diretorioRaiz/view/livroView";
+import CriarTabelas from "#diretorioRaiz/banco/BDTabelas";
 //const leitor = require("readline-sync");
 //const livroView = require("#diretorioRaiz/view/livroView.js");
 
@@ -20,7 +20,7 @@ function menu() {
 (async () => {
   //criação de 1 objeto unico que irá manipular o View
   await CriarTabelas();
-  const view: object = new LivroView();
+  const view: LivroView = new LivroView();
 
   //Inicio da execução do codigo
   let opt: number;
