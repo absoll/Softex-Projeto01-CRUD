@@ -45,9 +45,13 @@ class LivroController {
         await this.#LivroBD.buscarMatricula(id);
 
       if (typeof dados == "object") {
-        let temporario = new Livro();
-        temporario.JSONparaCLASSE(dados[0]);
-        retorno.push(temporario);
+        if (dados.length !== 0) {
+          let temporario = new Livro();
+          temporario.JSONparaCLASSE(dados[0]);
+          retorno.push(temporario);
+        } else {
+          retorno = dados;
+        }
       } else {
         retorno = dados;
       }
